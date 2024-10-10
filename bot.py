@@ -14,7 +14,7 @@ LOGGER = logging.getLogger(__name__)
 
 api_id = int(os.environ.get("APP_ID", "22920799"))
 api_hash = os.environ.get("API_HASH", "e6226116f74ba8dc1ceae2d572a39d80")
-bot_token = os.environ.get("TOKEN", "6515197149:AAEiSWp0SNt7YL-DsovQk54VYCEPPAHsrOQ")
+bot_token = os.environ.get("TOKEN", "8103483580:AAFbwuHz1pUQsfDPrNm6lAeHpqm6O16u-_U")
 client = TelegramClient('client', api_id, api_hash).start(bot_token=bot_token)
 spam_chats = []
 
@@ -45,7 +45,7 @@ async def help(event):
     )
   )
   
-@client.on(events.NewMessage(pattern="^@all ?(.*)"))
+@client.on(events.NewMessage(pattern="^/tagall ?(.*)"))
 async def mentionall(event):
   chat_id = event.chat_id
   if event.is_private:
@@ -93,7 +93,7 @@ async def mentionall(event):
     if not chat_id in spam_chats:
       break
     usrnum += 1
-    usrtxt += f"🧸[{usr.first_name}](tg://user?id={usr.id}) \n"
+    usrtxt += f"🗿[{usr.first_name}](tg://user?id={usr.id}) \n"
     if usrnum == 5:
       if mode == "text_on_cmd":
         txt = f"{usrtxt}\n\n{msg}"
@@ -108,7 +108,7 @@ async def mentionall(event):
   except:
     pass
 
-@client.on(events.NewMessage(pattern="^/cancel$"))
+@client.on(events.NewMessage(pattern="^/stop$"))
 async def cancel_spam(event):
   if not event.chat_id in spam_chats:
     return await event.respond('ᴜᴅᴀʜ ɢᴀ ᴀᴅᴀ ᴛᴀɢᴀʟʟ ʙᴏᴅᴏʜ...')
